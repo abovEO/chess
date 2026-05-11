@@ -3,27 +3,34 @@ package chess;
 import chess.Pieces.Piece;
 
 public class Cell {
-   private int row;
-   private int col;
+    private final int row;
+    private final int col;
 
-   private Piece piece;
+    private Piece piece;
 
-   public int getRow(){
-       return this.row;
-   }
-   public int getCol(){
-       return this.col;
-   }
+    public Cell(int row, int col) {
 
-   public Piece getPiece(){
-       return this.piece;
-   }
+        this.row = row;
+        this.col = col;
+    }
 
-   public void setPiece(Piece piece){
-       this.piece = piece;
-   }
+    public int getRow() {
+        return this.row;
+    }
 
-   public boolean isEmpty(){
-       return piece == null;
-   }
+    public int getCol() {
+        return this.col;
+    }
+
+    public Piece getPiece() {
+        return this.piece;
+    }
+
+    public void setPiece(Piece piece) {
+        this.piece = piece;
+    }
+
+    public boolean isEmpty() {
+        return piece == null;
+    }
 }

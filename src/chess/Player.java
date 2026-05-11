@@ -2,8 +2,8 @@ package chess;
 
 public class Player {
 
-    private String name;
-    private Color color;
+    private final String name;
+    private final Color color;
 
     public Player(String name,
                   Color color) {
@@ -14,5 +14,8 @@ public class Player {
 
     public Color getColor() {
         return color;
+    }
+    public String getName() {
+        return name;
     }
 }
