@@ -30,15 +30,50 @@ public class Game {
 
         if (isValidMove) {
             board.movePiece(from, to);
-            switchTurns();
             System.out.println("Move Executed");
+            switchTurns();
+            if(isCheckmate(CurrentPlayer)) {
+                System.out.println( CurrentPlayer.getName() + " is in checkmate. LOST");
+            }
+            if(isStalemate(CurrentPlayer)) {
+                System.out.println( CurrentPlayer.getName() + " is in stalemate. LOST");
+            }
         } else {
             System.out.println("Invalid move");
-            return;
         }
+
+
     }
 
     public void switchTurns() {
         CurrentPlayer = CurrentPlayer == WhitePlayer ? BlackPlayer : WhitePlayer;
+    }
+
+    public boolean isCheckmate(Player player) {
+        boolean kingInCheck =
+                validator.isKingUnderAttack(
+                        board,
+                        player.getColor());
+
+        boolean hasMoves =
+                validator.hasLegalMoves(
+                        board,
+                        player);
+        return kingInCheck && !hasMoves;
+    }
+
+    public boolean isStalemate(Player player) {
+
+        boolean kingInCheck =
+                validator.isKingUnderAttack(
+                        board,
+                        player.getColor());
+
+        boolean hasMoves =
+                validator.hasLegalMoves(
+                        board,
+                        player);
+
+        return !kingInCheck && !hasMoves;
     }
 }

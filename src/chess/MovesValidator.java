@@ -75,4 +75,56 @@ public class MovesValidator {
         }
         return null;
     }
+
+    public boolean hasLegalMoves(
+            Board board,
+            Player player) {
+
+        for (int fromRow = 0; fromRow < 8; fromRow++) {
+
+            for (int fromCol = 0; fromCol < 8; fromCol++) {
+
+                Cell from =
+                        board.getCell(fromRow, fromCol);
+
+                Piece piece =
+                        from.getPiece();
+
+                // empty square
+                if (piece == null) {
+                    continue;
+                }
+
+                // opponent piece
+                if (piece.getColor()
+                        != player.getColor()) {
+
+                    continue;
+                }
+
+                // try all destinations
+                for (int toRow = 0; toRow < 8; toRow++) {
+
+                    for (int toCol = 0; toCol < 8; toCol++) {
+
+                        Cell to =
+                                board.getCell(toRow, toCol);
+
+                        Move move =
+                                new Move(from, to);
+
+                        if (isValidMove(
+                                board,
+                                move,
+                                player)) {
+
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
 }
